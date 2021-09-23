@@ -6,6 +6,7 @@ var escape = require('lodash.escape')
 var YOUTUBE = 'youtube'
 var VIMEO = 'vimeo'
 var DAILYMOTION = 'dailymotion'
+var LOOM = 'loom'
 
 var validVimeoOpts = [
   'thumbnail_small',
@@ -28,6 +29,12 @@ var validDailyMotionOpts = [
   'thumbnail_480_url',
   'thumbnail_720_url',
   'thumbnail_1080_url'
+]
+var validLoomOpts = [
+  'hide_owner',
+  'hide_share',
+  'hide_title',
+  'hideEmbedTopBar'
 ]
 
 var VIMEO_MATCH_RE = /^(?:\/video|\/channels\/[\w-]+|\/groups\/[\w-]+\/videos)?\/(\d+)/
@@ -65,6 +72,15 @@ embed.info = function (url) {
     return {
       id: id,
       source: DAILYMOTION,
+      url: url.href
+    }
+  }
+
+  id = detectLoom(url)
+  if (id) {
+    return {
+      id: id,
+      source: LOOM,
       url: url.href
     }
   }
@@ -114,6 +130,14 @@ function detectDailymotion (url) {
   return null
 }
 
+function detectLoom (url) {
+  if (url.hostname.indexOf('loom.com') > -1) {
+    return url.pathname.split('/')[2];
+  }
+
+  return null
+}
+
 embed.vimeo = function (id, opts) {
   opts = parseOptions(opts)
   return '<iframe src="//player.vimeo.com/video/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
@@ -121,12 +145,17 @@ embed.vimeo = function (id, opts) {
 
 embed.youtube = function (id, opts) {
   opts = parseOptions(opts)
-  return '<iframe src="//www.youtube.com/embed/' + id + opts.query + '"' + opts.attr + ' frameborder="0" allowfullscreen></iframe>'
+  return '<iframe src="//www.youtube-nocookie.com/embed/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
 }
 
 embed.dailymotion = function (id, opts) {
   opts = parseOptions(opts)
-  return '<iframe src="//www.dailymotion.com/embed/video/' + id + opts.query + '"' + opts.attr + ' frameborder="0" allowfullscreen></iframe>'
+  return '<iframe src="//www.dailymotion.com/embed/video/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+}
+
+embed.loom = function (id, opts) {
+  opts = parseOptions(opts)
+  return '<iframe src="https://www.loom.com/embed/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
 }
 
 embed.youtube.image = function (id, opts, cb) {
