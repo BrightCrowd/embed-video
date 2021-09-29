@@ -7,6 +7,7 @@ var YOUTUBE = 'youtube'
 var VIMEO = 'vimeo'
 var DAILYMOTION = 'dailymotion'
 var LOOM = 'loom'
+var PANOPTO = 'panopto'
 
 var validVimeoOpts = [
   'thumbnail_small',
@@ -37,11 +38,20 @@ var validLoomOpts = [
   'hideEmbedTopBar'
 ]
 
+var validPanoptoOpts = [
+  'autoplay',
+  'offerviewer',
+  'showtitle',
+  'showbrand',
+  'captions',
+  'interactivity'
+];
+
 var VIMEO_MATCH_RE = /^(?:\/video|\/channels\/[\w-]+|\/groups\/[\w-]+\/videos)?\/(\d+)/
 
 function embed (url, opts) {
   var res = embed.info(url)
-  return res && embed[res.source] && embed[res.source](res.id, opts)
+  return res && embed[res.source] && embed[res.source](res.id, opts, url)
 }
 
 embed.info = function (url) {
@@ -81,6 +91,15 @@ embed.info = function (url) {
     return {
       id: id,
       source: LOOM,
+      url: url.href
+    }
+  }
+
+  id = detectPanopto(url)
+  if (id) {
+    return {
+      id: id,
+      source: PANOPTO,
       url: url.href
     }
   }
@@ -138,6 +157,14 @@ function detectLoom (url) {
   return null
 }
 
+function detectPanopto (url) {
+  if (url.hostname.endsWith('panopto.com')) {
+    return url.query && url.query.tid;
+  }
+
+  return null
+}
+
 embed.vimeo = function (id, opts) {
   opts = parseOptions(opts)
   return '<iframe src="//player.vimeo.com/video/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
@@ -156,6 +183,12 @@ embed.dailymotion = function (id, opts) {
 embed.loom = function (id, opts) {
   opts = parseOptions(opts)
   return '<iframe src="https://www.loom.com/embed/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+}
+
+embed.panopto = function (id, opts, url) {
+  opts = { offerviewer: true, ...parseOptions(opts) }
+  const { hostname } = URL.parse(url, true);
+  return '<iframe src="https://' + hostname + '/Panopto/Pages/Embed.aspx?tid=' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen  allowfullscreen></iframe>'
 }
 
 embed.youtube.image = function (id, opts, cb) {
