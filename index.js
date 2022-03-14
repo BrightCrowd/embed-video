@@ -1,27 +1,27 @@
-var URL = require('url')
-var promise = require('promise-polyfill')
-var fetch = require('fetch-ponyfill')({ Promise: promise }).fetch
-var escape = require('lodash.escape')
+const URL = require('url')
+const promise = require('promise-polyfill')
+const {fetch} = require('fetch-ponyfill')({ Promise: promise })
+const escape = require('lodash.escape')
 
-var YOUTUBE = 'youtube'
-var VIMEO = 'vimeo'
-var DAILYMOTION = 'dailymotion'
-var LOOM = 'loom'
-var PANOPTO = 'panopto'
+const YOUTUBE = 'youtube'
+const VIMEO = 'vimeo'
+const DAILYMOTION = 'dailymotion'
+const LOOM = 'loom'
+const PANOPTO = 'panopto'
 
-var validVimeoOpts = [
+const validVimeoOpts = [
   'thumbnail_small',
   'thumbnail_medium',
   'thumbnail_large'
 ]
-var validYouTubeOpts = [
+const validYouTubeOpts = [
   'default',
   'mqdefault',
   'hqdefault',
   'sddefault',
   'maxresdefault'
 ]
-var validDailyMotionOpts = [
+const validDailyMotionOpts = [
   'thumbnail_60_url',
   'thumbnail_120_url',
   'thumbnail_180_url',
@@ -31,14 +31,14 @@ var validDailyMotionOpts = [
   'thumbnail_720_url',
   'thumbnail_1080_url'
 ]
-var validLoomOpts = [
+const validLoomOpts = [
   'hide_owner',
   'hide_share',
   'hide_title',
   'hideEmbedTopBar'
 ]
 
-var validPanoptoOpts = [
+const validPanoptoOpts = [
   'autoplay',
   'offerviewer',
   'showtitle',
@@ -47,7 +47,7 @@ var validPanoptoOpts = [
   'interactivity'
 ];
 
-var VIMEO_MATCH_RE = /^(?:\/video|\/channels\/[\w-]+|\/groups\/[\w-]+\/videos)?\/(\d+)/
+const VIMEO_MATCH_RE = /^(?:\/video|\/channels\/[\w-]+|\/groups\/[\w-]+\/videos)?\/(\d+)/
 
 function embed (url, opts) {
   var res = embed.info(url)

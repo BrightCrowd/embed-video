@@ -26,12 +26,11 @@
   },
   "homepage": "https://github.com/alanshaw/embed-video",
   "devDependencies": {
-    "standard": "^11.0.1",
-    "tape": "^4.0.0"
+    "tape": "^5.5.2"
   },
   "dependencies": {
-    "fetch-ponyfill": "^4.0.0",
+    "fetch-ponyfill": "^7.1.0",
     "lodash.escape": "^4.0.1",
-    "promise-polyfill": "^6.0.2"
+    "promise-polyfill": "^8.2.3"
   }
 }
