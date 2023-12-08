@@ -48,6 +48,7 @@ const validPanoptoOpts = [
 ];
 
 const VIMEO_MATCH_RE = /^(?:\/video|\/channels\/[\w-]+|\/groups\/[\w-]+\/videos)?\/(\d+)/
+const YOUTUBE_SHORTS_MATCH_RE = /^\/shorts\/([^/?]+)/
 
 function embed (url, opts) {
   var res = embed.info(url)
@@ -127,6 +128,10 @@ function detectVimeo (url) {
 
 function detectYoutube (url) {
   if (url.hostname.indexOf('youtube.com') > -1) {
+    const matchShorts = url.pathname.match(YOUTUBE_SHORTS_MATCH_RE);
+    if (matchShorts) {
+      return matchShorts[1];
+    }
     return url.query.v
   }
 
