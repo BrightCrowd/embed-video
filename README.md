@@ -1,31 +1,31 @@
 # embed-video
 
-[![Build Status](http://img.shields.io/travis/alanshaw/embed-video.svg)](https://travis-ci.org/alanshaw/embed-video) [![devDependency Status](https://david-dm.org/alanshaw/embed-video/dev-status.svg)](https://david-dm.org/alanshaw/embed-video#info=devDependencies) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+> Get embed code for embedding youtube/vimeo/loom/dailymotion/whatever video in websites from URL or ID.
 
-> Get embed code for embedding youtube/vimeo/dailymotion/whatever video in websites from URL or ID.
+Currently supports YouTube, YouTube Shorts, Vimeo, Loom, panopto and DailyMotion. Please pull request to add others!
 
-Currently supports YouTube, Vimeo and DailyMotion. Please pull request to add others!
+Forked from unmaintained https://github.com/alanshaw/embed-video and modernized
 
 ## Example
 
 ```js
-var embed = require("embed-video")
+const embed = require("embed-video");
 
-var vimeoUrl = "http://vimeo.com/19339941"
-var youtubeUrl = "https://www.youtube.com/watch?v=twE64AuqE9A"
-var dailymotionUrl = "https://www.dailymotion.com/video/x20qnej_red-bull-presents-wild-ride-bmx-mtb-dirt_sport"
+const vimeoUrl = "http://vimeo.com/19339941";
+const youtubeUrl = "https://www.youtube.com/watch?v=twE64AuqE9A";
+const dailymotionUrl = "https://www.dailymotion.com/video/x20qnej_red-bull-presents-wild-ride-bmx-mtb-dirt_sport";
 
-console.log(embed(vimeoUrl))
-console.log(embed(youtubeUrl))
-console.log(embed(dailymotionUrl))
+console.log(embed(vimeoUrl));
+console.log(embed(youtubeUrl));
+console.log(embed(dailymotionUrl));
 
-var vimeoId = "6964150"
-var youtubeId = "9XeNNqeHVDw"
-var dailymotionId = "x20qnej"
+const vimeoId = "6964150";
+const youtubeId = "9XeNNqeHVDw";
+const dailymotionId = "x20qnej";
 
-console.log(embed.vimeo(vimeoId))
-console.log(embed.youtube(youtubeId))
-console.log(embed.dailymotion(dailymotionId))
+console.log(embed.vimeo(vimeoId));
+console.log(embed.youtube(youtubeId));
+console.log(embed.dailymotion(dailymotionId));
 ```
 
 Output:
@@ -42,7 +42,7 @@ Output:
 ## Usage
 
 ```js
-var embed = require("embed-video")
+const embed = require("embed-video");
 ```
 
 ### embed(url, [options])
@@ -123,7 +123,7 @@ embedVideo.image('https://www.youtube.com/watch?v=ekETjYMo6QE', {image: 'mqdefau
   console.log(thumbnail.src)
   // https://img.youtube.com/vi/ekETjYMo6QE/mqdefault.jpg
   console.log(thumbnail.html)
-  // <img src="https://img.youtube.com/vi/ekETjYMo6QE/mqdefault.jpg"/>  
+  // <img src="https://img.youtube.com/vi/ekETjYMo6QE/mqdefault.jpg"/>
 })
 ```
 
