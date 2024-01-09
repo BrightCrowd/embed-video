@@ -172,22 +172,22 @@ function detectPanopto (url) {
 
 embed.vimeo = function (id, opts) {
   opts = parseOptions(opts)
-  return '<iframe src="//player.vimeo.com/video/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+  return '<iframe title="Vimeo Media Player" src="//player.vimeo.com/video/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
 }
 
 embed.youtube = function (id, opts) {
   opts = parseOptions(opts)
-  return '<iframe src="//www.youtube-nocookie.com/embed/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+  return '<iframe title="YouTube Media Player" src="//www.youtube-nocookie.com/embed/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
 }
 
 embed.dailymotion = function (id, opts) {
   opts = parseOptions(opts)
-  return '<iframe src="//www.dailymotion.com/embed/video/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+  return '<iframe title="Dailymotion Media Player" src="//www.dailymotion.com/embed/video/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
 }
 
 embed.loom = function (id, opts) {
   opts = parseOptions(opts)
-  return '<iframe src="https://www.loom.com/embed/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+  return '<iframe title="Loom Media Player" src="https://www.loom.com/embed/' + id + opts.query + '"' + opts.attr + ' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
 }
 
 embed.panopto = function (id, opts, url) {
